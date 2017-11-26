@@ -11,7 +11,8 @@ module Imgurapi
 
       # https://api.imgur.com/endpoints/image#image-upload
       def image_upload(local_file, optional_params: optional_params)
-        file_type = FileType.new(local_file)
+        optional_params ||= {}
+      	file_type = FileType.new(local_file)
 
         image = if file_type.url?
                   local_file

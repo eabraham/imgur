@@ -10,7 +10,7 @@ module Imgurapi
       end
 
       # https://api.imgur.com/endpoints/image#image-upload
-      def image_upload(local_file)
+      def image_upload(local_file, optional_params: optional_params)
         file_type = FileType.new(local_file)
 
         image = if file_type.url?
@@ -22,8 +22,8 @@ module Imgurapi
 
                   Base64.encode64(file.read)
                 end
-
-        Imgurapi::Image.new communication.call(:post, 'image', image: image)
+        payload = { image: image }.merge(optional_params)
+        Imgurapi::Image.new communication.call(:post, 'image', payload)
       end
 
       # https://api.imgur.com/endpoints/image#image-delete

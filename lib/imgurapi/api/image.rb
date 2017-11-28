@@ -43,7 +43,7 @@ module Imgurapi
 
 	raise 'Invalid image id type. Must be a string.' if id.nil? || !id.is_a?(String) || id == '' || !!(id =~ /[^\w]/)
 
-        communication.call(:post, "gallery/image/#{id}}", optional_params)      
+        communication.call(:post, "gallery/image/#{id}", optional_params)      
       end
     end
   end

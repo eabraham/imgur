@@ -37,6 +37,14 @@ module Imgurapi
 
         communication.call(:delete, "image/#{id}")
       end
+
+      def image_to_gallery(id, optional_params: optional_params)
+	optional_params ||= {}
+
+	raise 'Invalid image id type. Must be a string.' if id.nil? || !id.is_a?(String) || id == '' || !!(id =~ /[^\w]/)
+
+        communication.call(:post, "gallery/image/#{id}}", optional_params)      
+      end
     end
   end
 end
